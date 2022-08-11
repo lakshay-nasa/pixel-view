@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mario</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            outline: 0;
+            overflow: hidden;
+        }
+
+        .main-container {
+            background-color: rgb(214, 184, 145);
+            width: 100vw;
+            height: 100vh;
+        }
+
+        #base-container {
+            background-color: white;
+            position: absolute;
+            width: 100vw;
+            height: 30vh;
+            bottom: 0;
+            display: grid;
+            grid-template-columns: repeat(160, auto);
+            transform: scaleY(-1);
+
+        }
+
+        .baseRow>div {
+            background-color: rgba(0, 0, 0, 0.564);
+            width: 0.51em;
+            height: 0.51em;
+            margin: 1px;
+        }
+
+
+
+        #float-container {
+            background-color: white;
+            position: absolute;
+            width: 14.7em;
+            height: 3.2em;
+            z-index: 1;
+            top: 40em;
+            left: 35em;
+        }
+
+        .floatRow {
+            display: flex;
+            flex-direction: row;
+            flex-flow: row wrap;
+        }
+
+        .floatRow>div {
+            background-color: rgba(0, 0, 0, 0.564);
+            width: 0.51em;
+            height: 0.51em;
+            margin: 1px;
+        }
+    </style>
+    <!-- <link rel="stylesheet" href="mario.css"> -->
+</head>
+
+<body>
+
+    <div class="main-container">
+        <div class="pixel-mario">
+        </div>
+        <div id="base-container">
+        </div>
+
+        <!-- <div id="float-container"> -->
+            <div class="floatRow">
+                <div></div>
+            </div>
+        </div>
+        <a href="about.html">H</a>
+    </div>
+</body>
+<script>
+
+
+    // Code for Base Boxes
+    var n = 160;
+    // baseRow = [];  //numeric
+    // above arr structure = [0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2]
+
+    // for (let index = 0; index < (n / 5); index++) {
+        // baseRow.push(index, index, index, index, index);
+
+    // };
+
+    baseCombinedRows = [];
+    for (let index = 0; index < (n); index += 10) {
+        baseCombinedRows.push(index);
+
+    };
+
+
+    // console.log(baseCombinedRows)
+
+    Universal_RowBoxesAllowed = [5, 10, 15, 20]
+
+    zero_RowBoxesAllowed = [5, 10, 15, 20];
+    let No_OfBoxesAt0 = zero_RowBoxesAllowed[Math.floor(Math.random() * zero_RowBoxesAllowed.length)];
+
+
+
+    SetNextRowBox_arr = [-5, 5];  // This will increment or decrement by 5 next row blocks with respect to previous row blocks
+    function NextBlockFunc(){
+        var SetNextRowBox = SetNextRowBox_arr[Math.floor(Math.random() * SetNextRowBox_arr.length)];
+        var NextRowBox = SetNextRowBox;
+        return NextRowBox;
+    }
+    // function NextBlockFunc() {
+    //     if (No_OfBoxesAt0 == 5) {
+    //         var NextRowBox = SetNextRowBox_arr[(Math.floor(Math.random() * (SetNextRowBox_arr.length - 1) + 1))];
+
+    //     }
+    //     else {
+    //         let SetNextRowBox = SetNextRowBox_arr[Math.floor(Math.random() * SetNextRowBox_arr.length)];
+    //         var NextRowBox = SetNextRowBox;
+    //     }
+    //     return NextRowBox;
+    // };
+
+
+
+    // var NextRowBox = NextBlockFunc();
+    var y = -1;
+
+    
+    
+    
+    // This will create 'n' no. of rows.
+    for (let no_ofRows = 0; no_ofRows < n; no_ofRows++) {
+        let baseRow = document.createElement("div");
+        baseRow.setAttribute("class", "baseRow");
+        document.getElementById("base-container").appendChild(baseRow);
+    }
+
+
+    // This function decides if low level is to bet set or not.
+    function lowLevel(){
+        Level_arr = [true, false]
+
+        if (Level_arr[Math.floor(Math.random() * Level_arr.length)] == true) {
+            return lowLevel = true
+        }
+
+        else{
+            return lowLevel = false;
+        }
+    }
+
+    // for (let x = 0; x < 3; x++) {
+    //             let block = document.createElement("div");
+    //             document.getElementsByClassName("baseRow")[1].appendChild(block);
+    //         }
+
+    const v = No_OfBoxesAt0;
+    blockValue = [v]
+
+    
+    baseCombinedRows.forEach((element, index) => {
+
+        if (Universal_RowBoxesAllowed.includes(blockValue[0])) {}
+        else{
+            blockValue[0] += 5;
+        }
+
+        // console.log(index + "  " + element)
+
+        console.log("The value of index now is " + index + " ----start---")
+        console.log("The value of element now is " + element )
+        
+        
+        
+        // This sets maximum value for 'r' (no. of next row to have same block)
+        if (element == 0) {
+            r = 10;
+            console.log("The value of r now is " + r)
+
+        }
+        else {
+            r = (element + 10);
+            console.log("The value of r now is " + r)
+        }
+
+
+
+        // This set lowLevel
+        // if (blockValue[0] == 5) {
+        //     if (lowLevel() == true) {
+                
+        //     }
+
+        //     else{
+                
+        //     }
+            
+        // }
+
+
+
+        // 1st loop decides no. of row having same block. 
+        // 2nd loop provides no. of block per row
+        for (let i = element; i < r; i++) {
+            for (let x = 0; x < blockValue[0]; x++) {
+                let block = document.createElement("div");
+                document.getElementsByClassName("baseRow")[i].appendChild(block);
+            }
+
+            console.log(i)
+        }
+        
+        console.log("Value of previous block is " + blockValue[0])
+        if(blockValue[0] == 20){
+            blockValue[0] -= 5;
+            nextValue = blockValue[0]        
+        }
+        else{
+            blockValue[0] += NextBlockFunc();
+            nextValue = blockValue[0]        
+        }
+
+        console.log("Value of next block is " + blockValue[0] + "\n")
+    });
+    
+
+
+
+    // Code for Floating Boxes
+    for (let z = 0; z < 115; z++) {
+        let block = document.createElement("div");
+        document.getElementsByClassName("floatRow")[0].appendChild(block);
+    }
+
+
+</script>
+
+</html>
+
+
+
+console.log(element)
+
+// Minimum box row array (Local Scope)
+MinBox_RowArr = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+
+// if (index = 0) {
+// r = 5;
+// }
+// else {
+// r = index * 5;
+// }
+
+console.log("index " + index)
+console.log("value of r " + r)
+
+for (let i = index; i = r; i++) {
+for (let x = 0; x < 3; x++) { let block=document.createElement("div");
+    document.getElementsByClassName("baseRow")[i].appendChild(block); } }

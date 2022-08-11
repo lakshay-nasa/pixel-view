@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mario</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            outline: 0;
+            overflow: hidden;
+        }
+
+        .main-container {
+            background-color: rgb(214, 184, 145);
+            width: 100vw;
+            height: 100vh;
+        }
+
+        #base-container {
+            background-color: white;
+            position: absolute;
+            width: 100vw;
+            height: 30vh;
+            bottom: 0;
+            display: grid;
+            grid-template-columns: repeat(160, auto);
+            transform: scaleY(-1);
+
+        }
+
+        .baseRow>div {
+            background-color: rgba(0, 0, 0, 0.564);
+            width: 0.51em;
+            height: 0.51em;
+            margin: 1px;
+        }
+
+
+
+        #float-container {
+            background-color: white;
+            position: absolute;
+            width: 14.7em;
+            height: 3.2em;
+            z-index: 1;
+            top: 40em;
+            left: 35em;
+        }
+
+        .floatRow {
+            display: flex;
+            flex-direction: row;
+            flex-flow: row wrap;
+        }
+
+        .floatRow>div {
+            background-color: rgba(0, 0, 0, 0.564);
+            width: 0.51em;
+            height: 0.51em;
+            margin: 1px;
+        }
+    </style>
+    <link rel="stylesheet" href="mario.css">
+</head>
+
+<body>
+
+    <div class="main-container">
+        <div class="pixel-mario">
+        </div>
+        <div id="base-container">
+        </div>
+
+        <div id="float-container">
+            <div class="floatRow">
+                <div></div>
+            </div>
+        </div>
+        <a href="about.html">H</a>
+    </div>
+</body>
+<script>
+
+
+    // Code for Base Boxes
+    var n = 160;
+    baseRow = [];  //numeric
+
+    for (let index = 0; index < (n / 5); index++) {
+        baseRow.push(index, index, index, index, index);
+
+    };
+
+
+    // console.log(baseRow)
+
+    // arr = [0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2]
+
+    StartRowBox_arr = [5, 10, 15, 20, 25];
+    let No_OfBoxesAt0 = StartRowBox_arr[Math.floor(Math.random() * StartRowBox_arr.length)];
+
+
+
+    SetNextRowBox_arr = [-5, +5, 0];  // This will increment or decrement by 5 next row blocks with respect to previous row blocks
+    function NextBlockFunc() {
+        if (No_OfBoxesAt0 == 5) {
+            var NextRowBox = SetNextRowBox_arr[(Math.floor(Math.random() * (SetNextRowBox_arr.length - 1) + 1))];
+
+        }
+        else {
+            let SetNextRowBox = SetNextRowBox_arr[Math.floor(Math.random() * SetNextRowBox_arr.length)];
+            var NextRowBox = SetNextRowBox;
+        }
+        return NextRowBox;
+    };
+
+
+
+    var NextRowBox = NextBlockFunc();
+    var y = -1;
+
+    baseRow.forEach(element => {
+        function myFunction() {
+            y += 1;
+            return y;
+        }
+
+        var m = myFunction();
+
+        let baseRow = document.createElement("div");
+        baseRow.setAttribute("class", "baseRow");
+        document.getElementById("base-container").appendChild(baseRow);
+
+
+        // Minimum box row array (Local Scope)
+        MinBox_RowArr = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+
+
+
+        switch (element) {
+            case 0:
+                for (let x = 0; x < No_OfBoxesAt0; x++) {
+                    let block = document.createElement("div");
+                    document.getElementsByClassName("baseRow")[m].appendChild(block);
+
+                }
+                break;
+
+            case 1:
+                for (let x = 0; x < (No_OfBoxesAt0 + NextRowBox); x++) {
+                    let block = document.createElement("div");
+                    document.getElementsByClassName("baseRow")[m].appendChild(block);
+                }
+                break;
+
+            case 4:
+                for (let x = 0; x < 15; x++) {
+                    let block = document.createElement("div");
+                    document.getElementsByClassName("baseRow")[m].appendChild(block);
+
+                }
+                break;
+
+            case 5:
+                for (let x = 0; x < 10; x++) {
+                    let block = document.createElement("div");
+                    document.getElementsByClassName("baseRow")[m].appendChild(block);
+
+                }
+                break;
+
+            case 6:
+                for (let x = 0; x < 5; x++) {
+                    let block = document.createElement("div");
+                    document.getElementsByClassName("baseRow")[m].appendChild(block);
+
+                }
+                break;
+
+            case MinBox_RowArr.includes(element):
+                for (let x = 0; x < 5; x++) {
+                    let block = document.createElement("div");
+                    document.getElementsByClassName("baseRow")[m].appendChild(block);
+
+                }
+                break;
+
+            case 6:
+                break;
+
+
+            default:
+                for (let x = 0; x < 20; x++) {
+                    let block = document.createElement("div");
+                    document.getElementsByClassName("baseRow")[m].appendChild(block);
+                }
+                break;
+        }
+        
+        /*
+        if (element == 0) {
+
+            for (let x = 0; x < No_OfBoxesAt0; x++) {
+                let block = document.createElement("div");
+                document.getElementsByClassName("baseRow")[m].appendChild(block);
+
+            }
+        }
+
+        else if (element == 1) {
+
+            for (let x = 0; x < (No_OfBoxesAt0 + NextRowBox); x++) {
+                let block = document.createElement("div");
+                document.getElementsByClassName("baseRow")[m].appendChild(block);
+            }
+        }
+
+
+
+
+        else if (element == 4) {
+
+            for (let x = 0; x < 15; x++) {
+                let block = document.createElement("div");
+                document.getElementsByClassName("baseRow")[m].appendChild(block);
+
+            }
+        }
+
+
+        else if (element == 5) {
+
+            for (let x = 0; x < 10; x++) {
+                let block = document.createElement("div");
+                document.getElementsByClassName("baseRow")[m].appendChild(block);
+
+            }
+        }
+
+        else if (element == 6) {
+
+            for (let x = 0; x < 5; x++) {
+                let block = document.createElement("div");
+                document.getElementsByClassName("baseRow")[m].appendChild(block);
+
+            }
+        }
+
+
+        else if (MinBox_RowArr.includes(element)) {
+
+            for (let x = 0; x < 5; x++) {
+                let block = document.createElement("div");
+                document.getElementsByClassName("baseRow")[m].appendChild(block);
+
+            }
+        }
+
+
+        else if (element == 21) {
+
+            for (let x = 0; x < 10; x++) {
+                let block = document.createElement("div");
+                document.getElementsByClassName("baseRow")[m].appendChild(block);
+
+            }
+        }
+
+
+        else if (element == 22) {
+
+            for (let x = 0; x < 10; x++) {
+                let block = document.createElement("div");
+                document.getElementsByClassName("baseRow")[m].appendChild(block);
+
+            }
+        }
+
+
+        else if (element == 23) {
+
+            for (let x = 0; x < 10; x++) {
+                let block = document.createElement("div");
+                document.getElementsByClassName("baseRow")[m].appendChild(block);
+
+            }
+        }
+
+
+        else if (element == 24) {
+
+            for (let x = 0; x < 15; x++) {
+                let block = document.createElement("div");
+                document.getElementsByClassName("baseRow")[m].appendChild(block);
+
+            }
+        }
+
+
+        else if (element == 30) {
+
+            for (let x = 0; x < 15; x++) {
+                let block = document.createElement("div");
+                document.getElementsByClassName("baseRow")[m].appendChild(block);
+
+            }
+        }
+
+
+        else if (element == 31) {
+
+            for (let x = 0; x < 15; x++) {
+                let block = document.createElement("div");
+                document.getElementsByClassName("baseRow")[m].appendChild(block);
+
+            }
+        }
+
+
+        else {
+            for (let x = 0; x < 20; x++) {
+                let block = document.createElement("div");
+                document.getElementsByClassName("baseRow")[m].appendChild(block);
+            }
+        }
+        
+        
+        */
+    });
+
+    // Code for Floating Boxes
+    for (let x = 0; x < 115; x++) {
+        let block = document.createElement("div");
+        document.getElementsByClassName("floatRow")[0].appendChild(block);
+    }
+
+
+</script>
+
+</html>
