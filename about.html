@@ -93,8 +93,10 @@
 
     // for (let index = 0; index < (n / 5); index++) {
         // baseRow.push(index, index, index, index, index);
-
-    // };
+        
+        // };
+        
+    lowLevel_rows = []
 
     baseCombinedRows = [];
     for (let index = 0; index < (n); index += 10) {
@@ -163,6 +165,9 @@
     //             let block = document.createElement("div");
     //             document.getElementsByClassName("baseRow")[1].appendChild(block);
     //         }
+
+
+
 
     const v = No_OfBoxesAt0;
     blockValue = [v]
@@ -267,3 +272,132 @@ console.log("value of r " + r)
 for (let i = index; i = r; i++) {
 for (let x = 0; x < 3; x++) { let block=document.createElement("div");
     document.getElementsByClassName("baseRow")[i].appendChild(block); } }
+
+
+
+/*
+
+n = 160;
+
+lowLevel_rows = []
+
+Universal_RowBoxesAllowed = [5, 10, 15, 20]
+
+zero_RowBoxesAllowed = [5, 10, 15, 20];
+let No_OfBoxesAt0 = zero_RowBoxesAllowed[Math.floor(Math.random() * zero_RowBoxesAllowed.length)];
+
+const v = No_OfBoxesAt0;
+blockValue = [v]
+
+
+baseCombinedRows = [];
+    for (let index = 0; index < (n); index += 10) {
+        baseCombinedRows.push(index);
+
+    };
+
+
+SetNextRowBox_arr = [-5, 5]; 
+
+
+function NextBlockFunc(){
+        var SetNextRowBox = SetNextRowBox_arr[Math.floor(Math.random() * SetNextRowBox_arr.length)];
+        var NextRowBox = SetNextRowBox;
+        return NextRowBox;
+    }
+
+
+function lowLevel(){
+        Level_arr = [true, false]
+
+        if (Level_arr[Math.floor(Math.random() * Level_arr.length)] == true) {
+            return lowLevel = true
+        }
+
+        else{
+            return lowLevel = false;
+        }
+    }
+    
+
+
+baseCombinedRows.forEach((element, index) => {
+
+    if (Universal_RowBoxesAllowed.includes(blockValue[0])) {}
+    else{
+        blockValue[0] += 5;
+        }
+        
+
+    console.log("The value of index now is " + index + " ----start---")
+    console.log("The value of element now is " + element )
+        
+
+    if (element == 0) {
+        r = 10;
+        console.log("The value of r now is " + r)
+
+        }
+    else {
+        r = (element + 10);
+        console.log("The value of r now is " + r)
+        }
+
+    for (let i = element; i < r; i++) {
+        // for (let x = 0; x < blockValue[0]; x++) {
+        //     let block = document.createElement("div");
+        //     document.getElementsByClassName("baseRow")[i].appendChild(block);
+        // }
+
+            console.log(i)
+        }
+        
+    console.log("Value of previous block is " + blockValue[0])
+    if (blockValue[0] == 20){
+        blockValue[0] -= 5;
+        nextValue = blockValue[0]        
+    }
+    else{
+        blockValue[0] += NextBlockFunc();
+        nextValue = blockValue[0]        
+    }
+
+        console.log("Value of next block is " + blockValue[0] + "\n")
+    });
+
+
+
+
+console.table(baseCombinedRows)
+
+
+block = 5
+// lL = lowLevel()
+lL = true;
+
+console.table(lL)
+
+
+baseCombinedRows.forEach((element, index) => {
+    if(element ==10){
+    if(lL == true){
+        for(let i = element; i < element+100; i+=10){
+    // console.log(i)
+    lowLevel_rows.push(i)
+            
+        }
+    return lowLevel_activate = true
+    }
+    else{
+        return lowLevel_activate = true
+    }
+    }
+    else{}
+})
+
+
+console.table(lowLevel_rows)
+
+
+
+*/
